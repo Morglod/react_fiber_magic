@@ -12,6 +12,8 @@ Update state on any component
 
 Works on 17 & 18 react
 
+Examples: [press me](https://github.com/Morglod/react_fiber_magic/tree/master/src/examples)
+
 _Highly recommended to use in production, when people cant just add extension points inside their components_
 
 ![important](./important.jpg)
@@ -64,8 +66,6 @@ function App() {    //                                                    |
 ## Replace component
 
 **I will always add extension points to my components:**
-
-More examples: [press me](https://github.com/Morglod/react_fiber_magic/src/examples)
 
 ```
 npm i react_fiber_magic
