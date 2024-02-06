@@ -1,0 +1,55 @@
+<body>
+    <h1>component replace</h1>
+    <div id="demo"></div>
+
+    <br />
+    <br />
+    <br />
+
+    <h1>state hack</h1>
+    <div id="state"></div>
+</body>
+<script src="demo.js"></script>
+<script src="state.js"></script>
+<style>
+    .hacked_button {
+        background: linear-gradient(-45deg, #00ff40, #00bbff);
+        background-size: 400% 400%;
+        animation: hacked_button_anim 0.5s
+            cubic-bezier(0.175, 0.885, 0.32, 1.275) infinite;
+        transform-origin: center center;
+        cursor: pointer;
+    }
+
+    button.hacked_button {
+        border-width: 10px;
+    }
+
+    body {
+        transform-origin: left top;
+    }
+
+    @keyframes hacked_gooo {
+        0% {
+            transform: scale(1);
+        }
+        100% {
+            transform: scale(2);
+        }
+    }
+
+    @keyframes hacked_button_anim {
+        0% {
+            background-position: 0% 50%;
+            transform: scale(1) rotateZ(-5deg);
+        }
+        50% {
+            background-position: 100% 50%;
+            transform: scale(0.9) rotateZ(5deg);
+        }
+        100% {
+            background-position: 0% 50%;
+            transform: scale(1) rotateZ(-5deg);
+        }
+    }
+</style>
