@@ -12,7 +12,8 @@ Update state on any component
 
 Works on 17 & 18 react
 
-Examples: [press me](https://github.com/Morglod/react_fiber_magic/tree/master/src/examples)
+Examples: [press me](https://github.com/Morglod/react_fiber_magic/tree/master/src/examples)  
+Demo: [press me](https://morglod.github.io/react_fiber_magic/)
 
 _Highly recommended to use in production, when people cant just add extension points inside their components_
 

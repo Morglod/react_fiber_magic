@@ -24,4 +24,5 @@ jest.config.js
 coverage
 src/__tests__
 lib/__tests__
-./important.jpg
+important.jpg
+index.html
