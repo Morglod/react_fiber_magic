@@ -137,12 +137,13 @@ function hackState(fiberNode) {
     return states;
 }
 exports.hackState = hackState;
-function hackReplace(ref, finder, toElementType) {
+function hackReplace(ref, finder, getDstElementType) {
     const rootFiberNode = getFiberNode(ref);
     const found = findFiberNode(rootFiberNode, finder);
     if (!found) {
         return;
     }
+    const toElementType = getDstElementType(found.type);
     found.type = toElementType;
     found.elementType = toElementType;
     const replaces = new Map();
@@ -216,11 +217,11 @@ function hackReplace(ref, finder, toElementType) {
     }
 }
 exports.hackReplace = hackReplace;
-function useHackReplace(finder, toElementType, ref) {
+function useHackReplace(finder, getDstElementType, ref) {
     const r = arguments.length === 3 ? ref : React.useRef(undefined);
     const [, forceUpdate] = React.useState(0);
     React.useEffect(() => {
-        hackReplace(r.current, finder, toElementType);
+        hackReplace(r.current, finder, getDstElementType);
         forceUpdate((x) => x + 1);
     }, []);
     return r;

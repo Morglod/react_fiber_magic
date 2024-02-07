@@ -46,7 +46,7 @@ function App() {
             <button
                 className="hacked_button"
                 onClick={() => {
-                    hackReplace(r.current, (type) => type === Boo, Boo2);
+                    hackReplace(r.current, (type) => type === Boo, () => Boo2);
                     forceUpd(x => x + 1);
                 }}
             >

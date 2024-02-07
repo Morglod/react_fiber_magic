@@ -30,7 +30,7 @@ function Depth() {
 }
 
 function App() {
-    const r = useHackReplace((type) => type === Boo, Boo2);
+    const r = useHackReplace((type) => type === Boo, () => Boo2);
 
     return (
         <div ref={r}>

@@ -64,13 +64,15 @@ export function hackState(fiberNode: any):
 export function hackReplace(
     ref: Element,
     finder: NodeMatcher,
-    toElementType: any
+    getDstElementType: (originalElementType: any) => any
 ) {
     const rootFiberNode = getFiberNode(ref);
     const found = findFiberNode(rootFiberNode, finder);
     if (!found) {
         return;
     }
+
+    const toElementType = getDstElementType(found.type);
     found.type = toElementType;
     found.elementType = toElementType;
 
@@ -157,14 +159,14 @@ export function hackReplace(
 
 export function useHackReplace(
     finder: NodeMatcher,
-    toElementType: any,
+    getDstElementType: (originalElementType: any) => any,
     ref?: React.RefObject<any>
 ): React.RefObject<any> {
     const r = arguments.length === 3 ? ref! : React.useRef<any>(undefined!);
     const [, forceUpdate] = React.useState(0);
 
     React.useEffect(() => {
-        hackReplace(r.current, finder, toElementType);
+        hackReplace(r.current, finder, getDstElementType);
         forceUpdate((x) => x + 1);
     }, []);
 

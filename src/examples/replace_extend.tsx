@@ -14,8 +14,8 @@ function Boo() {
     );
 }
 
-function Boo2(...args: any[]) {
-    const ch = (Boo as any)(...args);
+const createBoo2 = (OriginalBoo: any) => (...args: any[]) => {
+    const ch = (OriginalBoo as any)(...args);
 
     return {
         ...ch,
@@ -24,14 +24,14 @@ function Boo2(...args: any[]) {
             children: [...ch.props.children, <button key="heh">And me!</button>]
         }
     };
-}
+};
 
 function Depth() {
     return <Boo />;
 }
 
 function App() {
-    const r = useHackReplace((type) => type === Boo, Boo2);
+    const r = useHackReplace((type) => type === Boo, createBoo2);
 
     return (
         <div ref={r}>
