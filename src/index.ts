@@ -4,7 +4,7 @@ type NodeMatcher = (
     factory: any,
     props: any,
     _fiber: any,
-    _element: any
+    _reactElement: any
 ) => boolean;
 
 export function findFiberNode(

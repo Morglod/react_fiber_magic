@@ -118,3 +118,35 @@ useLayoutEffect(() => {
 
 return <div ref={r}> ... Boo is somewhere inside here ... </div>;
 ```
+
+## Replace and insert children
+
+```tsx
+function Boo() {
+    const [c, setC] = React.useState(10);
+
+    return (
+        <span>
+            {c}
+            <button onClick={() => setC((x) => x + 1)}>Click me</button>
+
+            // --- insert here ----
+
+        </span>
+    );
+}
+
+function Boo2(...args: any[]) {
+    const ch = (Boo as any)(...args);
+
+    return {
+        ...ch,
+        props: {
+            ...ch.props,
+            children: [...ch.props.children, <button key="heh">And me!</button>]
+        }
+    };
+}
+
+useHackReplace((type) => type === Boo, Boo2);
+```
