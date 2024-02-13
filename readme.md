@@ -54,11 +54,11 @@ function Depth() {
                     //                                                    |
                     //                                                    |
 function App() {    //                                                    |
-    const r = useHackReplace((type) => type === Boo, () => Boo2); // <----|
+    const NewDepth = useWrapHackReplace(Depth, (type) => type === Boo, () => Boo2);
 
     return (
-        <div ref={r}>
-            <Depth />
+        <div>
+            <NewDepth />
         </div>
     );
 }
@@ -75,24 +75,20 @@ npm i react_fiber_magic
 Replace hook:
 
 ```ts
-import { useHackReplace } from "react_fiber_magic";
+import { useWrapHackReplace } from "react_fiber_magic";
 
-// returns ref object
-useHackReplace(
+// returns new component (wrapped target)
+useWrapHackReplace(
+    TargetComponent,
+
     // used to find exact element you are interested in
     (elementType: Component | string, props: {}) => boolean,
 
     // new component to replace with
     (OriginalComponent) => ReplaceWithComponent,
 
-    // useHackReplace creates & returns ref,
-    // but if you already have one, you can pass it
-    ?RefObject
+    deps?: any[]
 );
-
-// or with utility func
-// they are the same, but hook works with ref
-hackReplace(rootElement: Element, predicate, (original) => newComponent);
 ```
 
 ## Hack state
@@ -117,36 +113,4 @@ useLayoutEffect(() => {
 }, []);
 
 return <div ref={r}> ... Boo is somewhere inside here ... </div>;
-```
-
-## Replace and insert children
-
-```tsx
-function Boo() {
-    const [c, setC] = React.useState(10);
-
-    return (
-        <span>
-            {c}
-            <button onClick={() => setC((x) => x + 1)}>Click me</button>
-
-            // --- insert here ----
-
-        </span>
-    );
-}
-
-const createBoo2 = (OriginalBoo: any) => (...args: any[]) => {
-    const ch = (OriginalBoo as any)(...args);
-
-    return {
-        ...ch,
-        props: {
-            ...ch.props,
-            children: [...ch.props.children, <button key="heh">And me!</button>]
-        }
-    };
-};
-
-useHackReplace((type) => type === Boo, createBoo2);
 ```
